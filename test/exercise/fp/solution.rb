@@ -18,8 +18,15 @@ module Exercise
         sum_rating / selected.size
       end
 
-      def chars_count(_films, _threshold)
-        0
+      def chars_count(films, threshold)
+        films.reduce(0) do |count, film|
+          rating = film['rating_kinopoisk'] ? film['rating_kinopoisk'].to_f : 0
+          if rating < threshold
+            count
+          else
+            count + film['name'].chars.reduce(0) { |acc, char| char == 'и' ? (acc + 1) : acc }
+          end
+        end
       end
     end
   end
