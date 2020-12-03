@@ -2,7 +2,17 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        max_num = array.max
+        def get_max(array)
+          def iter(max, ar)
+            return max if ar.size == 0
+            first, *rest = ar
+            max = first > max ? first : max
+            iter(max, rest)
+          end
+          first, *rest = array
+          iter(first, rest)
+        end
+        max_num = get_max(array)
         array.map! { |num| num.positive? ? max_num : num }
       end
 
