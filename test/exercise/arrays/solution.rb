@@ -2,14 +2,11 @@ module Exercise
   module Arrays
     class << self
       def get_max(array)
-        iter = ->(max, arr) do
-          return max if arr.empty?
-          first, *rest = arr
-          max = first > max ? first : max
-          iter.call(max, rest)
+        max, *rest = array
+        for num in rest do
+          max = num if num > max
         end
-        first, *rest = array
-        iter.call(first, rest)
+        max
       end
 
       def replace(array)
